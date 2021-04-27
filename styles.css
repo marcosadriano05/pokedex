@@ -1,0 +1,54 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+:root {
+  --grass: #64ff34;
+  --fire: rgb(255, 187, 0);
+  --blue: rgb(0, 140, 255);
+}
+
+.grass {
+  background: var(--grass);
+}
+
+.fire {
+  background: var(--fire);
+}
+
+.blue {
+  background: var(--blue);
+}
+
+body {
+  width: 100%;
+  min-height: 100vh;
+  padding: 2rem 1rem;
+}
+
+section {
+  display: flex;
+  flex: 1;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+article {
+  border: none;
+  border-radius: 10px;
+  width: max-content;
+  height: max-content;
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+}
+
+article img {
+  border: 2px solid purple;
+  border-radius: 50%;
+  background: #fff;
+}
