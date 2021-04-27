@@ -6,49 +6,190 @@
 
 :root {
   --grass: #64ff34;
-  --fire: rgb(255, 187, 0);
-  --blue: rgb(0, 140, 255);
+  --fire: #ffbb00;
+  --water: #008cff;
+  --bug: #b3ff00;
+  --normal: #9c9200;
+  --poison: #a011ff;
+  --electric: #fffb00;
+  --ground: #e6d602;
+  --fairy: #ff2f97;
+  --fighting: #cc0000;
+  --psychic: #ff7abc;
+  --rock: #817900;
+  --ghost: #6d00b6;
+  --ice: #61b8ff;
+  --dragon: #5e00d8;
+  --flying: #a865ff;
+  --steel: #d3d3d3;
 }
 
-.grass {
-  background: var(--grass);
+.grass { background: var(--grass); }
+.grass.poison { 
+  background: linear-gradient(to right, var(--grass), var(--poison)); 
+}
+.grass.psychic { 
+  background: linear-gradient(to right, var(--grass), var(--psychic));
 }
 
-.fire {
-  background: var(--fire);
+.fire { background: var(--fire); }
+.fire.flying { 
+  background: linear-gradient(to right, var(--fire), var(--flying)); 
 }
 
-.blue {
-  background: var(--blue);
+.water { background: var(--water); }
+.water.fighting { 
+  background: linear-gradient(to right, var(--water), var(--fighting));
+}
+.water.poison { 
+  background: linear-gradient(to right, var(--water), var(--poison)); 
+}
+.water.psychic { 
+  background: linear-gradient(to right, var(--water), var(--psychic));
+}
+.water.ice { 
+  background: linear-gradient(to right, var(--water), var(--ice));
+}
+.water.flying { 
+  background: linear-gradient(to right, var(--water), var(--flying)); 
+}
+
+.bug { background: var(--bug); }
+.bug.flying { 
+  background: linear-gradient(to right, var(--bug), var(--flying));
+}
+.bug.poison { 
+  background: linear-gradient(to right, var(--bug), var(--poison)); 
+}
+.bug.grass { 
+  background: linear-gradient(to right, var(--bug), var(--grass));
+}
+
+.normal { background: var(--normal); }
+.normal.flying { 
+  background: linear-gradient(to right, var(--normal), var(--flying)); 
+}
+.normal.fairy { 
+  background: linear-gradient(to right, var(--normal), var(--fairy)); 
+}
+
+.poison { background: var(--poison); }
+.poison.ground { 
+  background: linear-gradient(to right, var(--poison), var(--ground));
+}
+.poison.flying { 
+  background: linear-gradient(to right, var(--poison), var(--flying)); 
+}
+
+.electric { background: var(--electric); }
+.electric.steel { 
+  background: linear-gradient(to right, var(--electric), var(--steel)); 
+}
+.electric.flying { 
+  background: linear-gradient(to right, var(--electric), var(--flying)); 
+}
+
+.ground { background: var(--ground); }
+
+.fairy { background: var(--fairy); }
+
+.fighting { background: var(--fighting); }
+
+.psychic { background: var(--psychic); }
+.psychic.fairy { 
+  background: linear-gradient(to right, var(--psychic), var(--fairy));
+}
+
+.rock { background: var(--rock); }
+.rock.ground { 
+  background: linear-gradient(to right, var(--rock), var(--ground)); 
+}
+.rock.water { 
+  background: linear-gradient(to right, var(--rock), var(--water)); 
+}
+.rock.flying { 
+  background: linear-gradient(to right, var(--rock), var(--flying));
+}
+
+.ghost { background: var(--ghost); }
+.ghost.poison { background: linear-gradient(to right, var(--ghost), var(--poison)); }
+
+.ice { background: var(--ice); }
+.ice.psychic { 
+  background: linear-gradient(to right, var(--ice), var(--psychic));
+}
+.ice.flying { 
+  background: linear-gradient(to right, var(--ice), var(--flying));
+}
+
+.dragon { background: var(--dragon); }
+.dragon.flying { 
+  background: linear-gradient(to right, var(--dragon), var(--flying)); 
 }
 
 body {
   width: 100%;
   min-height: 100vh;
   padding: 2rem 1rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  background: #eeeeee;
 }
 
 section {
   display: flex;
   flex: 1;
   flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
   gap: 1rem;
 }
 
+strong {
+  font-size: 2rem;;
+}
+
 article {
+  position: relative;
   border: none;
   border-radius: 10px;
-  width: max-content;
-  height: max-content;
+  width: 250px;
+  height: 200px;
   padding: 1rem;
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: space-around;
+  justify-content: space-between;
+  box-shadow: 0 0 50px rgba(0, 0, 0, 0.15);
 }
 
 article img {
-  border: 2px solid purple;
+  border: 2px solid black;
   border-radius: 50%;
-  background: #fff;
+  background: #eeeeee;
+  z-index: 2;
+}
+
+.pokemon_name {
+  position: absolute;
+  top: calc(50%);
+  font-size: 1.5rem;
+  line-height: 1;
+  padding: 0.5rem 1rem;
+  margin: 0.5rem 0;
+  background: rgb(175, 175, 175);
+  border-radius: 15px;
+  border: 2px solid #000;
+  color: #000;
+}
+
+span {
+  font-size: 1.2rem;
+  font-weight: bold;
+  padding: 0.1rem 1rem;
+  background: #eeeeee;
+  border-radius: 15px;
 }

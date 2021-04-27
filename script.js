@@ -10,13 +10,21 @@ async function getData(number) {
 async function init() {
   let pokemons = []
 
-  for (let i = 1; i <=10; i++) {
+  for (let i = 1; i <=151; i++) {
     let data = await getData(i)
-    pokemons.push(data)
+
+    let types = data.types.map(el => el.type.name)
+
+    pokemons.push(`
+      <article class="${types.join(' ')}">
+        <img src="${data.sprites.front_default}" alt="${data.name}">
+        <h2 class="pokemon_name">${data.name}</h2>
+        <span>Type: ${types.join(' | ')}</span>
+      </article>
+    `)
   }
 
-  console.log(pokemons)
-  return pokemons
+  pokedexSection.innerHTML = pokemons.join('')
 }
 
 init()
