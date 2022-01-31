@@ -23,26 +23,36 @@ function pokemonCompoment(pokemonData) {
   `
 }
 
-async function init() {
+function getPokemonsPromisesData(quantity = 151) {
+  if (quantity > 151 || quantity < 0) {
+    throw new Error("Pokemons quantity must to be between 1 and 151")
+  }
   let pokemonPromisesData = []
-  for (let i = 1; i <= 151; i++) {
+  for (let i = 1; i <= quantity; i++) {
     pokemonPromisesData.push(fetchPokemonDataPromise(i))
   }
+  return pokemonPromisesData
+}
 
-  const pokemonsDataPromises = await Promise.all(pokemonPromisesData)
-  
-  const pokemons = await Promise.all(pokemonsDataPromises.map(async data => {
-    const pokemonData = await data.json()
-    return parsePokemonData(pokemonData)
-  }))
-
-  pokedexSection.innerHTML = ''
-  const pokemonsSorted = pokemons.sort(function (a, b) {
+function sortPokemonsArray(pokemons) {
+  return pokemons.sort(function (a, b) {
     if (a.id < a.id) return -1
     if (a.id > b.id) return 1
     return 0
   })
+}
 
+async function resolveArrayOfPromises(promises) {
+  return await Promise.all(promises.map(async data => {
+    const pokemonData = await data.json()
+    return parsePokemonData(pokemonData)
+  }))
+}
+
+async function init() {
+  const pokemonsDataPromises = await Promise.all(getPokemonsPromisesData(151))
+  const pokemons = await resolveArrayOfPromises(pokemonsDataPromises)
+  const pokemonsSorted = sortPokemonsArray(pokemons)
   pokedexSection.innerHTML = pokemonsSorted.reduce((acc, cur) => acc + pokemonCompoment(cur), '')
 }
 
