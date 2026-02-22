@@ -1,4 +1,4 @@
-import { Context, Data, Effect } from "effect";
+import { Data, Effect, ServiceMap } from "effect";
 
 class BusinessPokemonError extends Data.TaggedError("BusinessPokemonError")<{
   message: string;
@@ -72,10 +72,9 @@ const fetchPokemonData = (
   );
 };
 
-class RenderToDom extends Context.Tag("RenderToDom")<
-  RenderToDom,
-  { readonly render: (pokemon: Pokemon) => Effect.Effect<void> }
->() {}
+class RenderToDom extends ServiceMap.Service<RenderToDom, {
+  readonly render: (pokemon: Pokemon) => Effect.Effect<void>;
+}>()("RenderToDom") {}
 
 const getPokemonsEffects = (
   quantity = 151,
@@ -118,9 +117,7 @@ const getPokemonsEffects = (
             sprites: { front_default: "" },
           }),
       ),
-      Effect.tap((result) =>
-        RenderToDom.pipe(Effect.andThen((render) => render.render(result)))
-      ),
+      Effect.tap((result) => RenderToDom.use((r) => r.render(result))),
     );
   }
   return effects;
@@ -150,7 +147,6 @@ const getPokemonsEffectsImpl = (
           }</span>
           `;
           return Effect.void;
-          // return Console.log(`Pokemon: ${pokemon.name}`);
         },
       },
     ),
