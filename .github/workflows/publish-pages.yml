@@ -2,7 +2,7 @@ name: Deploy
 
 on:
   push:
-    branchs: ["main"]
+    branches: ["main"]
 
 permissions:
   contents: read
@@ -21,10 +21,11 @@ jobs:
         uses: actions/checkout@v4
       - name: Setup Pages
         uses: actions/configure-pages@v5
-      - name: Build with Deno
+      - name: Setup Deno
         uses: denoland/setup-deno@v2
         with:
           deno-version: lts
+      - name: Build
         run: deno bundle --minify script.ts --output script.js
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
@@ -37,4 +38,4 @@ jobs:
     steps:
       - id: deployment
         name: Deploy to Github Pages
-        uses: actions/deplou-pages@v4
+        uses: actions/deploy-pages@v4
